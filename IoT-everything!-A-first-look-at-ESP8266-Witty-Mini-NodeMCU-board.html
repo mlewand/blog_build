@@ -1,0 +1,284 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>
+    
+      IoT everything! A first look at ESP8266 (WiFi Witty Cloud Development) board | Mlewand blog
+    
+  </title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quattrocento+Sans">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+  <script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UAA-96615286-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</head>
+
+
+<body>
+
+  <div class="container">
+    <header class="masthead">
+  <h3 class="masthead-title">
+    <a href="/">Mlewand blog</a>
+    <small class="masthead-subtitle">Thoughts on programming.</small>
+    <div class="menu">
+  <div class="menu-content">
+    
+    <a class="element first  " href="/menu/about">About</a>
+    
+    <a class="element   last" href="/menu/archives">Archives</a>
+    
+  </div>
+  <div class="social-icons">
+    <a href="https://github.com/mlewand"><i class="fa fa-github" aria-hidden="true" target="_blank"></i></a>
+    <a href="https://twitter.com/m_lewand"><i class="fa fa-twitter" aria-hidden="true" target="_blank"></i></a>
+    
+    
+    
+      <a href="mailto:code@mlewandowski.com"><i class="fa fa-envelope" aria-hidden="true" target="_blank"></i></a>
+    
+  </div>
+</div>
+
+  </h3>
+</header>
+
+
+    <div class="post-container">
+      <h1>
+  IoT everything! A first look at ESP8266 (WiFi Witty Cloud Development) board
+</h1>
+
+
+  <img src="/images/witty-mini.jpg">
+
+
+<p>After witnessing some really cool automation systems recently, I’ve become excited about the possibilities that IoT brings into play. That’s why I decided to buy an ESP8266 module, however there were no convenient tutorials on how to actually get started. It wasn’t hard with figuring it out - but it make sense to share it, so you can get things going with ease.</p>
+
+<p>Since there’s a great integration for Arduino IDE, we’ll use that to create and upload the software.</p>
+
+<h2 id="hardware">Hardware</h2>
+
+<p>Before we start programming let’s just quickly summarize what the Witty Mini provides in terms of the hardware.</p>
+
+<p><img alt="Witty Cloud Development board side by side with its USB board" src="/images/posts/witty-mini/separated.jpg" title="" srcset="/assets/resized/615/separated.jpg 615w,/assets/resized/800/separated.jpg 800w,/assets/resized/1200/separated.jpg 1200w,/images/posts/witty-mini/separated.jpg 2001w" /></p>
+
+<ul>
+  <li>Main board - left side - this is where the ESP8266, WiFi microcontroller, sits on.</li>
+  <li>USB board - right side - that’s where you plug your USB driver when uploading your code to the MCU.</li>
+</ul>
+
+<h3 id="main-board">Main Board</h3>
+
+<p>In the center you see the heart of this tiny fellow, but it’s accompanied with some useful features too:</p>
+
+<ol>
+  <li>USB port for power supply (only),</li>
+  <li>RGB LED diode,</li>
+  <li>a photoresistor,</li>
+  <li>a simple SPST switch.</li>
+</ol>
+
+<p>But more importantly, it contains convenient 2.54mm headers which allow to plug it into your breadboard.</p>
+
+<h3 id="usb-board">USB Board</h3>
+
+<p>It includes (a second!) USB socket, that has to be used for programming the microcontroller. It also has RESET and FLASH buttons. You’ll need to use these buttons during your first program upload.</p>
+
+<h2 id="software">Software</h2>
+
+<p>Now let’s focus on deploying a simple program to the MCU.</p>
+
+<p>Before you go any further, make sure you have <a href="https://www.arduino.cc/en/Main/Software">Arduino IDE</a> installed.</p>
+
+<h3 id="setting-up-arduino">Setting Up Arduino</h3>
+
+<p>Since ESP8266, the main WiFi controller used in this board, is not by default supported by Arduino (why should it? it’s a third party!) we’ll have to take a few extra steps. The good part is that you have to do it only once! 😉</p>
+
+<p>All the instructions are always up to date in the <a href="https://github.com/esp8266/Arduino#installing-with-boards-manager">ESP8266 Arduino</a> project, I’ll put them below just for your convenience:</p>
+
+<ol>
+  <li>Open Arduino IDE.</li>
+  <li>
+    <p>Go to <code class="highlighter-rouge">File</code> / <code class="highlighter-rouge">Preferences</code> (or just press <kbd>ctrl</kbd> + <kbd>,</kbd>).
+<img alt="Arduino IDE Preferences with ESP8266 board manager URL pasted" src="/images/posts/witty-mini/arduino-ide-preferences.png" title="" srcset="/assets/resized/615/arduino-ide-preferences.png 615w,/assets/resized/800/arduino-ide-preferences.png 800w,/assets/resized/1200/arduino-ide-preferences.png 1200w,/images/posts/witty-mini/arduino-ide-preferences.png 1516w" /></p>
+  </li>
+  <li>In “Additional Boards Manager URLs:” field you need to add a link <code class="highlighter-rouge">http://arduino.esp8266.com/stable/package_esp8266com_index.json</code>. In case you have already some value set, you can have multiple values as long as you’ll separate them with commas.</li>
+  <li>Save.</li>
+  <li>Now go to Boards Manager: <code class="highlighter-rouge">Tools</code> / <code class="highlighter-rouge">Board: &lt;boardName&gt;</code>/ <code class="highlighter-rouge">Boards manager…</code> and type in ESP8266, install the matched pacakge.
+<img alt="Arduino IDE Board Manager screen" src="/images/posts/witty-mini/arduino-board-manager.png" title="" srcset="/assets/resized/615/arduino-board-manager.png 615w,/assets/resized/800/arduino-board-manager.png 800w,/assets/resized/1200/arduino-board-manager.png 1200w,/images/posts/witty-mini/arduino-board-manager.png 2000w" /></li>
+</ol>
+
+<h3 id="first-sketch">First Sketch</h3>
+
+<p>Now we’re ready for coding! First we’ll simply use mighty <em>Blink</em> example to keep things easy.</p>
+
+<p>Start by connecting the board to your computer. So slide the top part to the bottom one:</p>
+
+<p><img alt="Upper and lower boards connected together" src="/images/posts/witty-mini/boards-connected.jpg" title="" srcset="/assets/resized/615/boards-connected.jpg 615w,/assets/resized/800/boards-connected.jpg 800w,/assets/resized/1200/boards-connected.jpg 1200w,/images/posts/witty-mini/boards-connected.jpg 1796w" /></p>
+
+<p>And connect the bottom usb board to your desktop. You’ll see that it will use the default firmware, for me it’s just lighting a green light.</p>
+
+<p><img alt="Board with a green LED on" src="/images/posts/witty-mini/green-led.jpg" title="" srcset="/assets/resized/615/green-led.jpg 615w,/assets/resized/800/green-led.jpg 800w,/assets/resized/1200/green-led.jpg 1200w,/images/posts/witty-mini/green-led.jpg 1580w" /></p>
+
+<p>Then open the <em>Blink</em> example provided with ESP8266 Arduino IDE integration:</p>
+
+<p><img alt="Arduino IDE examples open, with Blink example highlighted" src="/images/posts/witty-mini/blink-example.png" title="" srcset="/assets/resized/615/blink-example.png 615w,/assets/resized/800/blink-example.png 800w,/assets/resized/1200/blink-example.png 1200w,/images/posts/witty-mini/blink-example.png 3016w" /></p>
+
+<p>Now it’s important to set the board type. There’s no dedicated type for a “Witty Cloud Development” but “Generic ESP8266 Module” will do. Also you need to chose the correct port, in my case it is COM3.</p>
+
+<p><img alt="Arduino IDE with &quot;Generic ESP8266 Module&quot; highlighted on a board list" src="/images/posts/witty-mini/board-settings.png" title="" srcset="/assets/resized/615/board-settings.png 615w,/assets/resized/800/board-settings.png 800w,/assets/resized/1200/board-settings.png 1200w,/images/posts/witty-mini/board-settings.png 2241w" /></p>
+
+<aside>
+  Be careful, using a wrong library <strong>can brick your microcontroller</strong>! I used &quot;ESP-12E&quot; to blink <code>LED_BUILTIN</code> and rather than lighting LED it… bricked my board 😿.
+</aside>
+
+<p>Now let’s switch <code class="highlighter-rouge">LED_BUILTIN</code> to <code class="highlighter-rouge">15</code> so that it will use a red LED, so you should end up with the code that looks like that:</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>     <span class="c1">// Initialize the 15 pin as an output
+</span><span class="p">}</span>
+
+<span class="c1">// the loop function runs over and over again forever
+</span><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>   <span class="c1">// Turn the LED on (Note that LOW is the voltage level
+</span>                           <span class="c1">// but actually the LED is on; this is because
+</span>                           <span class="c1">// it is acive low on the ESP-01)
+</span>  <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>             <span class="c1">// Wait for a second
+</span>  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>  <span class="c1">// Turn the LED off by making the voltage HIGH
+</span>  <span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>             <span class="c1">// Wait for two seconds (to demonstrate the active low LED)
+</span><span class="p">}</span>
+</code></pre>
+</div>
+
+<aside>
+  Ideally you&#39;d like to <code>#define</code> a constant like <code>LED_RED</code> but we&#39;ll just use a <em>magic number</em> for simplicity&#39;s sake.
+</aside>
+
+<h4 id="first-upload">First Upload</h4>
+
+<p>Now the first upload could be a bit tricky. If you attempt to upload straight from here you’ll see an error:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Archiving built core (caching) in: X:\tmp\core_esp8266_esp8266_generic_CpuFrequency_80,FlashFreq_40,FlashMode_dio,UploadSpeed_115200,FlashSize_512K64,ResetMethod_ck,Debug_Disabled,DebugLevel_None_____352fbb4a515bda32a7f9dcf0d11c00ac.a
+Sketch uses 222205 bytes (51%) of program storage space. Maximum is 434160 bytes.
+Global variables use 31572 bytes (38%) of dynamic memory, leaving 50348 bytes for local variables. Maximum is 81920 bytes.
+error: failed reading byte
+warning: espcomm_send_command: cant receive slip payload data
+error: failed reading byte
+(…)
+warning: espcomm_send_command: cant receive slip payload data
+warning: espcomm_sync failed
+error: espcomm_open failed
+error: espcomm_upload_mem failed
+</code></pre>
+</div>
+
+<p>What you need to do is just to <strong>hold FLASH</strong>, press and release RESET and release FLASH button.</p>
+
+<p>As a result small blue LED will blink for a fraction of a second, and RGB diode will turn green-blue. Now you’re ready to upload your sketch, go on and use <code class="highlighter-rouge">Sketch</code> \ <code class="highlighter-rouge">Upload</code> option (or if you feel like a keyboard hero just hit <kbd>ctrl</kbd> + <kbd>u</kbd> 😉).</p>
+
+<p><img alt="Sketch upload progress in Arduino IDE" src="/images/posts/witty-mini/successful-compile.png" title="" srcset="/assets/resized/615/successful-compile.png 615w,/assets/resized/800/successful-compile.png 800w,/assets/resized/1200/successful-compile.png 1200w,/images/posts/witty-mini/successful-compile.png 2426w" /></p>
+
+<p>And take a look at your board now it blinks red, great! Now that you know how to upload your sketches let us utilize the WiFi part!</p>
+
+<p><img alt="The LED on microcontroller lights a red color" src="/images/posts/witty-mini/red-led.jpg" title="" srcset="/assets/resized/615/red-led.jpg 615w,/assets/resized/800/red-led.jpg 800w,/assets/resized/1200/red-led.jpg 1200w,/images/posts/witty-mini/red-led.jpg 1842w" /></p>
+
+<h3 id="wifi-example">WiFi Example</h3>
+
+<p>I found <em>WiFiScan</em> example to be the simplest one in the package. It essentially lists you nearby networks discovered by the ESP8266 MCU. So, let’s get this thing going!</p>
+
+<p>First, go to <code class="highlighter-rouge">Examples</code> \ <code class="highlighter-rouge">ESP8266WiFi</code> \ <code class="highlighter-rouge">WiFiScan</code>:</p>
+
+<p><img alt="&quot;WiFiScan&quot; example focused in Arduino IDE" src="/images/posts/witty-mini/wifi-scan-example.png" title="" srcset="/assets/resized/615/wifi-scan-example.png 615w,/assets/resized/800/wifi-scan-example.png 800w,/assets/resized/1200/wifi-scan-example.png 1200w,/images/posts/witty-mini/wifi-scan-example.png 1636w" /></p>
+
+<p>Make sure your board is connected and that you pressed FLASH, RESET switch sequence just as in the previous example. After that press <kbd>ctrl</kbd> + <kbd>u</kbd> to compile and upload the sketch.</p>
+
+<p>Once the sketch is uploaded just press <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>m</kbd> to open up a serial port monitor. You’ll see that your ESP8266 is checking for WiFi networks, and send the list through serial port:</p>
+
+<p><img alt="An example output from &quot;WiFiScan&quot; showing two WiFi networks listed" src="/images/posts/witty-mini/wifi-scan-example-output.png" title="" srcset="/assets/resized/615/wifi-scan-example-output.png 615w,/assets/resized/800/wifi-scan-example-output.png 800w,/images/posts/witty-mini/wifi-scan-example-output.png 991w" /></p>
+
+<p>So here you have a simple WiFi example. Of course it did not involve connecting to your network, and actually communicating with other devices. If you wish to try out a more advanced example I’ll cover it in another blog post.</p>
+
+<h3 id="pinout">Pinout</h3>
+
+<p>I did not receive any datasheet from where I bought the board, so I had to search the pinout around the net. I’ll include it below to save you the trouble:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>SPST_SWITCH = 4;
+PHOTO_RESISTOR = A0;
+GREEN_LED = 12;
+BLUE_LED = 13;
+RED_LED = 15;
+</code></pre>
+</div>
+
+<h3 id="final-thoughts">Final Thoughts</h3>
+
+<p>I must say that I’m impressed how featureful this board is for it’s cost. You get a very simple, extremely quick to prototype board in just couple of bucks! I bought it for 7$ (just because electronics isn’t too cheap here in Poland), but I can see on eBay it’s around 4$, it’s even cheaper on AliExpress.</p>
+
+<p>It does have some disadvantages though, first of all is that… it’s easy get it started but (with USB board connected) it’s not easy to actually plug it into a breadboard. But… The ability to being able to quickly test something is much more important to me.</p>
+
+<p>I have already had a good time with ESP2866 thanks to this board, and I’ll definitely put some more posts on that in the future.</p>
+
+
+<span class="post-date">
+  Written on
+  
+  August
+  1st
+    ,
+  2017
+  by Marek Lewandowski
+</span>
+<div class="post-date">Feel free to share!</div>
+  <div class="sharing-icons">
+    <a href="https://twitter.com/intent/tweet?text=IoT everything! A first look at ESP8266 (WiFi Witty Cloud Development) board&amp;url=/IoT-everything!-A-first-look-at-ESP8266-Witty-Mini-NodeMCU-board.html&amp;via=m_lewand" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=/IoT-everything!-A-first-look-at-ESP8266-Witty-Mini-NodeMCU-board.html&amp;title=IoT everything! A first look at ESP8266 (WiFi Witty Cloud Development) board" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+    <a href="https://plus.google.com/share?url=/IoT-everything!-A-first-look-at-ESP8266-Witty-Mini-NodeMCU-board.html" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  </div>
+</div>
+
+
+
+  <section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript" async>
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'https://mlewand-blog.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+    </div>
+
+    <footer class="footer">
+  <a href="https://github.com/mlewand"><i class="fa fa-github" aria-hidden="true" target="_blank"></i></a>
+  <a href="https://twitter.com/m_lewand"><i class="fa fa-twitter" aria-hidden="true" target="_blank"></i></a>
+  
+  
+  
+  <a href="mailto:code@mlewandowski.com"><i class="fa fa-envelope" aria-hidden="true" target="_blank"></i></a>
+  
+  <div class="post-date"><a href="https://lenpaul.github.io/Lagrange/menu/about.html">Lagrange | a minimalist Jekyll theme by Paul Le</a></div>
+</footer>
+
+
+  </div>
+
+</body>
+</html>

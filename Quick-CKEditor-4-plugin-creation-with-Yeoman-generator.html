@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>
+    
+      Quick CKEditor 4 plugin creation with Yeoman generator | Mlewand blog
+    
+  </title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quattrocento+Sans">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+  <script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UAA-96615286-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</head>
+
+
+<body>
+
+  <div class="container">
+    <header class="masthead">
+  <h3 class="masthead-title">
+    <a href="/">Mlewand blog</a>
+    <small class="masthead-subtitle">Thoughts on programming.</small>
+    <div class="menu">
+  <div class="menu-content">
+    
+    <a class="element first  " href="/menu/about">About</a>
+    
+    <a class="element   last" href="/menu/archives">Archives</a>
+    
+  </div>
+  <div class="social-icons">
+    <a href="https://github.com/mlewand"><i class="fa fa-github" aria-hidden="true" target="_blank"></i></a>
+    <a href="https://twitter.com/m_lewand"><i class="fa fa-twitter" aria-hidden="true" target="_blank"></i></a>
+    
+    
+    
+      <a href="mailto:code@mlewandowski.com"><i class="fa fa-envelope" aria-hidden="true" target="_blank"></i></a>
+    
+  </div>
+</div>
+
+  </h3>
+</header>
+
+
+    <div class="post-container">
+      <h1>
+  Quick CKEditor 4 plugin creation with Yeoman generator
+</h1>
+
+
+  <img src="/images/construction.jpg">
+
+
+<p>For last couple of weeks I’ve been playing a little with <a href="http://yeoman.io">Yeoman</a> and so far I’m enjoying the philosophy of this project. While working on CKEditor 4 we sometimes need to create some smaller plugin, to quickly mock something up.</p>
+
+<p>In the past I’ve already created some Python scripts for generating a proper plugin for me, however it was pretty much untested XP thing, not really maintained in a way I’d like it to be. So I asked myself: why not create a yeoman generator for CKEditor 4?</p>
+
+<p>tl;dr I’ll only describe how to create a plugin with <a href="https://github.com/mlewand/generator-ckeditor4">CKEditor 4 Generator</a>, as there already are many great tutorials on how to write a generator.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>You need to install yeoman and the generator itself:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install -g yo generator-ckeditor4
+</code></pre>
+</div>
+
+<p>And that’s all!</p>
+
+<h2 id="creating-a-plugin">Creating a Plugin</h2>
+
+<p>Since in generator CKEditor is referenced as a npm module, you don’t have to worry about downloading CKEditor or anything.</p>
+
+<p>Just go to your workspace and type:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>yo ckeditor4:createPlugin myplugin --dialog --button
+</code></pre>
+</div>
+
+<p>Where <code class="highlighter-rouge">myplugin</code> is the name of your plugin. It will automatically create a subdirectory in your cwd.</p>
+
+<h2 id="testing">Testing</h2>
+
+<p>A great benefit of this is that you have test platform set out of the box!</p>
+
+<p>You can run server with <code class="highlighter-rouge">npm run test-server</code> and open <code class="highlighter-rouge">http://localhost:1030</code>.</p>
+
+<p>You can also run all the tests at once using <code class="highlighter-rouge">npm test</code>.</p>
+
+<p>More information on testing platform in <a href="http://docs.ckeditor.com/#!/guide/dev_tests">CKEditor Testing Environment</a>.</p>
+
+<h2 id="dialogs-and-buttons">Dialogs and Buttons</h2>
+
+<p>As seen in example from “Creating a Plugin” section, you can create dialogs and buttons so you don’t have to worry about file name typo or anything! However these are optional.</p>
+
+<h2 id="type-definitions">Type Definitions</h2>
+
+<p>By default it will also put a proper typings package into <code class="highlighter-rouge">package.json</code> so that you get a good code completion in Visual Studio Code.</p>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>All in all this generator is a big help in setting up a complete CKEditor 4 plugin infrastructure.</p>
+
+<p>Looking into a future there are couple of things I’d like to improve:</p>
+
+<ul>
+  <li>Definitely building process. As current CKE4 build process could be greatly simplified and modernized (integrating it with npm, git etc).</li>
+  <li>More modular approach. I should split more things into sub generators. This is something I have learned down the road, so for instance you’ll see that <code class="highlighter-rouge">createPlugin</code> sub generator has a lot of responsibilities. More recent parts have it’s things already extracted.</li>
+</ul>
+
+<p>Hope you’ll find this generator helpful. If you have any suggestions feel free to drop an issue on <a href="https://github.com/mlewand/generator-ckeditor4">GitHub</a>.</p>
+
+<p>Keep in mind that this is my pet project, it’s not supported by CKSource. So if you see any issues the best way is to drop a pull request 🍺!</p>
+
+
+<span class="post-date">
+  Written on
+  
+  April
+  8th,
+  2017
+  by Marek Lewandowski
+</span>
+<div class="post-date">Feel free to share!</div>
+  <div class="sharing-icons">
+    <a href="https://twitter.com/intent/tweet?text=Quick CKEditor 4 plugin creation with Yeoman generator&amp;url=/Quick-CKEditor-4-plugin-creation-with-Yeoman-generator.html&amp;via=m_lewand" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=/Quick-CKEditor-4-plugin-creation-with-Yeoman-generator.html&amp;title=Quick CKEditor 4 plugin creation with Yeoman generator" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+    <a href="https://plus.google.com/share?url=/Quick-CKEditor-4-plugin-creation-with-Yeoman-generator.html" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  </div>
+</div>
+
+
+
+  <section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript" async>
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'https://mlewand-blog.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+    </div>
+
+    <footer class="footer">
+  <a href="https://github.com/mlewand"><i class="fa fa-github" aria-hidden="true" target="_blank"></i></a>
+  <a href="https://twitter.com/m_lewand"><i class="fa fa-twitter" aria-hidden="true" target="_blank"></i></a>
+  
+  
+  
+  <a href="mailto:code@mlewandowski.com"><i class="fa fa-envelope" aria-hidden="true" target="_blank"></i></a>
+  
+  <div class="post-date"><a href="https://lenpaul.github.io/Lagrange/menu/about.html">Lagrange | a minimalist Jekyll theme by Paul Le</a></div>
+</footer>
+
+
+  </div>
+
+</body>
+</html>
