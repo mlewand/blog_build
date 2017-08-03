@@ -73,7 +73,7 @@ ga('send', 'pageview');
 
 <p>Before we start programming let’s just quickly summarize what the Witty Mini provides in terms of the hardware.</p>
 
-<p><img alt="Witty Cloud Development board side by side with its USB board" src="/images/posts/witty-mini/separated.jpg" title="" srcset="/assets/resized/615/separated.jpg 615w,/assets/resized/800/separated.jpg 800w,/assets/resized/1200/separated.jpg 1200w,/images/posts/witty-mini/separated.jpg 2001w" /></p>
+<p><img alt="Witty Cloud Development board side by side with its USB board" src="/images/posts/witty-mini/separated.jpg" title="" srcset="/assets/resized/615/separated.jpg 1x,/assets/resized/1230/separated.jpg 2x,/assets/resized/1845/separated.jpg 3x,/images/posts/witty-mini/separated.jpg" /></p>
 
 <ul>
   <li>Main board - left side - this is where the ESP8266, WiFi microcontroller, sits on.</li>
@@ -111,14 +111,12 @@ ga('send', 'pageview');
 
 <ol>
   <li>Open Arduino IDE.</li>
-  <li>
-    <p>Go to <code class="highlighter-rouge">File</code> / <code class="highlighter-rouge">Preferences</code> (or just press <kbd>ctrl</kbd> + <kbd>,</kbd>).
-<img alt="Arduino IDE Preferences with ESP8266 board manager URL pasted" src="/images/posts/witty-mini/arduino-ide-preferences.png" title="" srcset="/assets/resized/615/arduino-ide-preferences.png 615w,/assets/resized/800/arduino-ide-preferences.png 800w,/assets/resized/1200/arduino-ide-preferences.png 1200w,/images/posts/witty-mini/arduino-ide-preferences.png 1516w" /></p>
-  </li>
+  <li>Go to <code class="highlighter-rouge">File</code> / <code class="highlighter-rouge">Preferences</code> (or just press <kbd>ctrl</kbd> + <kbd>,</kbd>).
+<img alt="Arduino IDE Preferences with ESP8266 board manager URL pasted" src="/images/posts/witty-mini/arduino-ide-preferences.png" title="" srcset="/assets/resized/615/arduino-ide-preferences.png 1x,/assets/resized/1230/arduino-ide-preferences.png 2x,/images/posts/witty-mini/arduino-ide-preferences.png" /></li>
   <li>In “Additional Boards Manager URLs:” field you need to add a link <code class="highlighter-rouge">http://arduino.esp8266.com/stable/package_esp8266com_index.json</code>. In case you have already some value set, you can have multiple values as long as you’ll separate them with commas.</li>
   <li>Save.</li>
   <li>Now go to Boards Manager: <code class="highlighter-rouge">Tools</code> / <code class="highlighter-rouge">Board: &lt;boardName&gt;</code>/ <code class="highlighter-rouge">Boards manager…</code> and type in ESP8266, install the matched pacakge.
-<img alt="Arduino IDE Board Manager screen" src="/images/posts/witty-mini/arduino-board-manager.png" title="" srcset="/assets/resized/615/arduino-board-manager.png 615w,/assets/resized/800/arduino-board-manager.png 800w,/assets/resized/1200/arduino-board-manager.png 1200w,/images/posts/witty-mini/arduino-board-manager.png 2000w" /></li>
+<img alt="Arduino IDE Board Manager screen" src="/images/posts/witty-mini/arduino-board-manager.png" title="" srcset="/assets/resized/615/arduino-board-manager.png 1x,/assets/resized/1230/arduino-board-manager.png 2x,/assets/resized/1845/arduino-board-manager.png 3x,/images/posts/witty-mini/arduino-board-manager.png" /></li>
 </ol>
 
 <h3 id="first-sketch">First Sketch</h3>
@@ -127,19 +125,19 @@ ga('send', 'pageview');
 
 <p>Start by connecting the board to your computer. So slide the top part to the bottom one:</p>
 
-<p><img alt="Upper and lower boards connected together" src="/images/posts/witty-mini/boards-connected.jpg" title="" srcset="/assets/resized/615/boards-connected.jpg 615w,/assets/resized/800/boards-connected.jpg 800w,/assets/resized/1200/boards-connected.jpg 1200w,/images/posts/witty-mini/boards-connected.jpg 1796w" /></p>
+<p><img alt="Upper and lower boards connected together" src="/images/posts/witty-mini/boards-connected.jpg" title="" srcset="/assets/resized/615/boards-connected.jpg 1x,/assets/resized/1230/boards-connected.jpg 2x,/images/posts/witty-mini/boards-connected.jpg" /></p>
 
 <p>And connect the bottom usb board to your desktop. You’ll see that it will use the default firmware, for me it’s just lighting a green light.</p>
 
-<p><img alt="Board with a green LED on" src="/images/posts/witty-mini/green-led.jpg" title="" srcset="/assets/resized/615/green-led.jpg 615w,/assets/resized/800/green-led.jpg 800w,/assets/resized/1200/green-led.jpg 1200w,/images/posts/witty-mini/green-led.jpg 1580w" /></p>
+<p><img alt="Board with a green LED on" src="/images/posts/witty-mini/green-led.jpg" title="" srcset="/assets/resized/615/green-led.jpg 1x,/assets/resized/1230/green-led.jpg 2x,/images/posts/witty-mini/green-led.jpg" /></p>
 
 <p>Then open the <em>Blink</em> example provided with ESP8266 Arduino IDE integration:</p>
 
-<p><img alt="Arduino IDE examples open, with Blink example highlighted" src="/images/posts/witty-mini/blink-example.png" title="" srcset="/assets/resized/615/blink-example.png 615w,/assets/resized/800/blink-example.png 800w,/assets/resized/1200/blink-example.png 1200w,/images/posts/witty-mini/blink-example.png 3016w" /></p>
+<p><img alt="Arduino IDE examples open, with Blink example highlighted" src="/images/posts/witty-mini/blink-example.png" title="" srcset="/assets/resized/615/blink-example.png 1x,/assets/resized/1230/blink-example.png 2x,/assets/resized/1845/blink-example.png 3x,/images/posts/witty-mini/blink-example.png" /></p>
 
 <p>Now it’s important to set the board type. There’s no dedicated type for a “Witty Cloud Development” but “Generic ESP8266 Module” will do. Also you need to chose the correct port, in my case it is COM3.</p>
 
-<p><img alt="Arduino IDE with &quot;Generic ESP8266 Module&quot; highlighted on a board list" src="/images/posts/witty-mini/board-settings.png" title="" srcset="/assets/resized/615/board-settings.png 615w,/assets/resized/800/board-settings.png 800w,/assets/resized/1200/board-settings.png 1200w,/images/posts/witty-mini/board-settings.png 2241w" /></p>
+<p><img alt="Arduino IDE with &quot;Generic ESP8266 Module&quot; highlighted on a board list" src="/images/posts/witty-mini/board-settings.png" title="" srcset="/assets/resized/615/board-settings.png 1x,/assets/resized/1230/board-settings.png 2x,/assets/resized/1845/board-settings.png 3x,/images/posts/witty-mini/board-settings.png" /></p>
 
 <aside>
   Be careful, using a wrong library <strong>can brick your microcontroller</strong>! I used &quot;ESP-12E&quot; to blink <code>LED_BUILTIN</code> and rather than lighting LED it… bricked my board 😿.
@@ -189,11 +187,11 @@ error: espcomm_upload_mem failed
 
 <p>As a result small blue LED will blink for a fraction of a second, and RGB diode will turn green-blue. Now you’re ready to upload your sketch, go on and use <code class="highlighter-rouge">Sketch</code> \ <code class="highlighter-rouge">Upload</code> option (or if you feel like a keyboard hero just hit <kbd>ctrl</kbd> + <kbd>u</kbd> 😉).</p>
 
-<p><img alt="Sketch upload progress in Arduino IDE" src="/images/posts/witty-mini/successful-compile.png" title="" srcset="/assets/resized/615/successful-compile.png 615w,/assets/resized/800/successful-compile.png 800w,/assets/resized/1200/successful-compile.png 1200w,/images/posts/witty-mini/successful-compile.png 2426w" /></p>
+<p><img alt="Sketch upload progress in Arduino IDE" src="/images/posts/witty-mini/successful-compile.png" title="" srcset="/assets/resized/615/successful-compile.png 1x,/assets/resized/1230/successful-compile.png 2x,/assets/resized/1845/successful-compile.png 3x,/images/posts/witty-mini/successful-compile.png" /></p>
 
 <p>And take a look at your board now it blinks red, great! Now that you know how to upload your sketches let us utilize the WiFi part!</p>
 
-<p><img alt="The LED on microcontroller lights a red color" src="/images/posts/witty-mini/red-led.jpg" title="" srcset="/assets/resized/615/red-led.jpg 615w,/assets/resized/800/red-led.jpg 800w,/assets/resized/1200/red-led.jpg 1200w,/images/posts/witty-mini/red-led.jpg 1842w" /></p>
+<p><img alt="The LED on microcontroller lights a red color" src="/images/posts/witty-mini/red-led.jpg" title="" srcset="/assets/resized/615/red-led.jpg 1x,/assets/resized/1230/red-led.jpg 2x,/images/posts/witty-mini/red-led.jpg" /></p>
 
 <h3 id="wifi-example">WiFi Example</h3>
 
@@ -201,13 +199,13 @@ error: espcomm_upload_mem failed
 
 <p>First, go to <code class="highlighter-rouge">Examples</code> \ <code class="highlighter-rouge">ESP8266WiFi</code> \ <code class="highlighter-rouge">WiFiScan</code>:</p>
 
-<p><img alt="&quot;WiFiScan&quot; example focused in Arduino IDE" src="/images/posts/witty-mini/wifi-scan-example.png" title="" srcset="/assets/resized/615/wifi-scan-example.png 615w,/assets/resized/800/wifi-scan-example.png 800w,/assets/resized/1200/wifi-scan-example.png 1200w,/images/posts/witty-mini/wifi-scan-example.png 1636w" /></p>
+<p><img alt="&quot;WiFiScan&quot; example focused in Arduino IDE" src="/images/posts/witty-mini/wifi-scan-example.png" title="" srcset="/assets/resized/615/wifi-scan-example.png 1x,/assets/resized/1230/wifi-scan-example.png 2x,/images/posts/witty-mini/wifi-scan-example.png" /></p>
 
 <p>Make sure your board is connected and that you pressed FLASH, RESET switch sequence just as in the previous example. After that press <kbd>ctrl</kbd> + <kbd>u</kbd> to compile and upload the sketch.</p>
 
 <p>Once the sketch is uploaded just press <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>m</kbd> to open up a serial port monitor. You’ll see that your ESP8266 is checking for WiFi networks, and send the list through serial port:</p>
 
-<p><img alt="An example output from &quot;WiFiScan&quot; showing two WiFi networks listed" src="/images/posts/witty-mini/wifi-scan-example-output.png" title="" srcset="/assets/resized/615/wifi-scan-example-output.png 615w,/assets/resized/800/wifi-scan-example-output.png 800w,/images/posts/witty-mini/wifi-scan-example-output.png 991w" /></p>
+<p><img alt="An example output from &quot;WiFiScan&quot; showing two WiFi networks listed" src="/images/posts/witty-mini/wifi-scan-example-output.png" title="" srcset="/assets/resized/615/wifi-scan-example-output.png 1x,/images/posts/witty-mini/wifi-scan-example-output.png" /></p>
 
 <p>So here you have a simple WiFi example. Of course it did not involve connecting to your network, and actually communicating with other devices. If you wish to try out a more advanced example I’ll cover it in another blog post.</p>
 
